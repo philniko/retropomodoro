@@ -1,10 +1,11 @@
-// main.js - Main Electron process
 const { app, BrowserWindow, Notification, ipcMain } = require('electron');
 const path = require('path');
-
 let mainWindow;
 
 function createWindow() {
+  // Icon setup varies by platform
+  const iconPath = path.join(__dirname, 'icon.png');
+  
   mainWindow = new BrowserWindow({
     width: 300,
     height: 480,
@@ -12,12 +13,18 @@ function createWindow() {
     frame: false,
     transparent: false,
     backgroundColor: '#000000',
+    icon: iconPath, // This works for Linux
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
       nodeIntegration: false
     }
   });
+
+  // Set taskbar icon for Windows
+  if (process.platform === 'win32') {
+    mainWindow.setIcon(iconPath);
+  }
 
   mainWindow.loadFile('index.html');
 }
@@ -30,7 +37,8 @@ ipcMain.on('timer-complete', (event, timerType) => {
   const notification = new Notification({
     title: title,
     body: body,
-    silent: false
+    silent: false,
+    icon: path.join(__dirname, 'icon.png') // Add icon to notifications too
   });
   
   notification.show();
@@ -43,7 +51,13 @@ ipcMain.on('close-app', () => {
   app.quit();
 });
 
+// Set app icon in the app.whenReady for macOS
 app.whenReady().then(() => {
+  // For macOS, set the dock icon
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(path.join(__dirname, 'icon.png'));
+  }
+  
   createWindow();
   
   app.on('activate', function () {
