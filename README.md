@@ -71,6 +71,7 @@ RetroPomodoro is built with:
 - Electron.js for cross-platform desktop functionality
 - HTML, CSS, and JavaScript for the interface
 - Canvas API for the analog clock visualization
+- Custom CRT screen effect for authentic retro feel
 
 ## License
 
