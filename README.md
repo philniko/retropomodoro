@@ -2,7 +2,7 @@
 
 A minimalist, black and white Pomodoro timer application with a retro aesthetic. RetroPomodoro helps you maintain focus and productivity using the Pomodoro Technique with a stylish, distraction-free interface.
 
-![RetroPomodoro Timer](./screenshots/retropomodoro.png)
+<img src="https://github.com/yourusername/retropomodoro/raw/main/screenshots/retropomodoro.png" alt="RetroPomodoro Timer" width="300"/>
 
 ## Features
 
