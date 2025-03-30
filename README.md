@@ -2,7 +2,7 @@
 
 A minimalist, black and white Pomodoro timer application with a retro aesthetic. RetroPomodoro helps you maintain focus and productivity using the Pomodoro Technique with a stylish, distraction-free interface.
 
-![RetroPomodoro Timer](./screenshots/retropomodoro.png)
+<img src="./screenshots/retropomodoro.png" alt="RetroPomodoro Timer" width="300"/>
 
 ## Features
 
@@ -71,6 +71,7 @@ RetroPomodoro is built with:
 - Electron.js for cross-platform desktop functionality
 - HTML, CSS, and JavaScript for the interface
 - Canvas API for the analog clock visualization
+- Custom CRT screen effect for authentic retro feel
 
 ## License
 
