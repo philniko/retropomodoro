@@ -18,8 +18,8 @@ A minimalist, black and white Pomodoro timer application with a retro aesthetic.
 ## Screenshots
 
 <div align="center">
-  <img src="./screenshots/retropomodoro_idle.png" alt="RetroPomodoro idle state" width="300"/>
-  <img src="./screenshots/retropomodoro_running.png" alt="RetroPomodoro running" width="300"/>
+  <img src="./screenshots/retropomodoro_idle.png" alt="RetroPomodoro idle state" width="400"/>
+  <img src="./screenshots/retropomodoro_running.png" alt="RetroPomodoro running" width="400"/>
 </div>
 
 ## Installation
