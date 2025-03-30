@@ -1,0 +1,24 @@
+{
+    "name": "retro-pomodoro",
+    "version": "1.0.0",
+    "description": "A minimalistic black and white retro Pomodoro timer",
+    "main": "main.js",
+    "scripts": {
+      "start": "electron .",
+      "package": "electron-builder --mac"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "electron": "^27.0.0",
+      "electron-builder": "^24.4.0"
+    },
+    "build": {
+      "appId": "com.retropomodoro.app",
+      "productName": "Retro Pomodoro",
+      "mac": {
+        "category": "public.app-category.productivity",
+        "icon": "build/icon.icns"
+      }
+    }
+  }

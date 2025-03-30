@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Retro Pomodoro</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="drag-area">RETRO POMODORO</div>
+      <button id="close-btn">×</button>
+    </div>
+    
+    <div class="timer-display">
+      <div class="time-info">
+        <div class="time-label">
+          <div>START:</div>
+          <div id="start-time">--:--:--</div>
+        </div>
+        <div class="analog-clock">
+          <canvas id="analog-timer" width="75" height="75"></canvas>
+        </div>
+        <div class="time-label">
+          <div>END:</div>
+          <div id="end-time">--:--:--</div>
+        </div>
+      </div>
+      <div id="time">25:00</div>
+    </div>
+    
+    <div class="mode-display">
+      <div id="mode">WORK</div>
+    </div>
+    
+    <div class="controls-container">
+      <div class="controls">
+        <button id="start-btn">START</button>
+        <button id="pause-btn">PAUSE</button>
+        <button id="reset-btn">RESET</button>
+      </div>
+      
+      <div class="settings">
+        <div class="setting">
+          <label>WORK TIME</label>
+          <input type="number" id="work-time" value="25" min="1" max="60">
+        </div>
+        <div class="session-counter">
+          SESSIONS:</br> <span id="session-count">0</span>
+        </div>
+        <div class="setting">
+          <label>BREAK TIME</label>
+          <input type="number" id="break-time" value="5" min="1" max="30">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="renderer.js"></script>
+</body>
+</html>
