@@ -7,6 +7,7 @@ const startBtn = document.getElementById('start-btn');
 const pauseBtn = document.getElementById('pause-btn');
 const resetBtn = document.getElementById('reset-btn');
 const closeBtn = document.getElementById('close-btn');
+const toggleModeBtn = document.getElementById('toggle-mode-btn');
 const workTimeInput = document.getElementById('work-time');
 const breakTimeInput = document.getElementById('break-time');
 const sessionCountDisplay = document.getElementById('session-count');
@@ -116,6 +117,81 @@ function formatDateTime(date) {
   return `${hours}:${minutes}:${seconds}`;
 }
 
+// Toggle between work and break modes
+// Create TV static effect
+function showStaticEffect() {
+  // Show stronger static noise
+  staticOverlay.style.opacity = '0.9';
+  
+  // Create multiple waves with more impact
+  for (let i = 0; i < 4; i++) {
+    setTimeout(() => {
+      // Clone the wave element for multiple waves
+      const wave = staticWave.cloneNode();
+      document.body.appendChild(wave);
+      
+      // Make waves thicker
+      wave.style.height = (i % 2 === 0) ? '40%' : '30%';
+      
+      // Set animation with different speeds
+      const duration = 0.6 + (Math.random() * 0.3);
+      wave.style.animation = `staticWave ${duration}s ${i * 0.1}s ease-in-out`;
+      
+      // Remove after animation completes
+      setTimeout(() => {
+        wave.remove();
+      }, duration * 1000 + 100);
+    }, i * 100);
+  }
+  
+  // Add brief white flash effect for emphasis
+  document.body.style.backgroundColor = '#333';
+  setTimeout(() => {
+    document.body.style.backgroundColor = '#000';
+  }, 100);
+  
+  // Hide static after effect completes but keep it visible longer
+  setTimeout(() => {
+    staticOverlay.style.opacity = '0';
+  }, 800);
+}
+
+function toggleMode() {
+  // Only allow toggling when timer is not running
+  if (isRunning) {
+    // Flash the button to indicate it can't be used while running
+    toggleModeBtn.style.backgroundColor = '#555';
+    setTimeout(() => {
+      toggleModeBtn.style.backgroundColor = '#000';
+    }, 300);
+    return;
+  }
+  
+  // Toggle mode
+  isWorkMode = !isWorkMode;
+  
+  // Spin the symbol for visual feedback
+  toggleModeBtn.style.transform = 'rotate(180deg)';
+  setTimeout(() => {
+    toggleModeBtn.style.transform = 'none';
+  }, 300);
+  
+  // Update time based on the new mode
+  if (isWorkMode) {
+    timeLeft = workTimeInput.value * 60;
+  } else {
+    timeLeft = breakTimeInput.value * 60;
+  }
+  
+  totalTime = timeLeft;
+  startDateTime = null;
+  endDateTime = null;
+  updateDisplay();
+  
+  // Show TV static effect instead of color change
+  showStaticEffect();
+}
+
 // Start timer
 function startTimer() {
   if (isRunning) return;
@@ -136,7 +212,7 @@ function startTimer() {
     timeLeft--;
     updateDisplay();
     
-    if (timeLeft <= 0) {
+          if (timeLeft <= 0) {
       clearInterval(timer);
       isRunning = false;
       
@@ -149,9 +225,9 @@ function startTimer() {
         timeLeft = breakTimeInput.value * 60;
         totalTime = timeLeft;
         window.electronAPI.timerComplete('work');
-        // Add visual and audio cues
-        document.body.style.backgroundColor = '#fff';
-        document.body.style.color = '#000';
+        // Add more subtle visual cues
+        document.body.style.backgroundColor = '#333';
+        document.body.style.color = '#ccc';
         setTimeout(() => {
           document.body.style.backgroundColor = '#000';
           document.body.style.color = '#fff';
@@ -162,9 +238,9 @@ function startTimer() {
         timeLeft = workTimeInput.value * 60;
         totalTime = timeLeft;
         window.electronAPI.timerComplete('break');
-        // Add visual and audio cues
-        document.body.style.backgroundColor = '#fff';
-        document.body.style.color = '#000';
+        // Add more subtle visual cues
+        document.body.style.backgroundColor = '#333';
+        document.body.style.color = '#ccc';
         setTimeout(() => {
           document.body.style.backgroundColor = '#000';
           document.body.style.color = '#fff';
@@ -205,6 +281,7 @@ startBtn.addEventListener('click', startTimer);
 pauseBtn.addEventListener('click', pauseTimer);
 resetBtn.addEventListener('click', resetTimer);
 closeBtn.addEventListener('click', () => window.electronAPI.closeApp());
+toggleModeBtn.addEventListener('click', toggleMode);
 
 // Settings change events
 workTimeInput.addEventListener('change', () => {

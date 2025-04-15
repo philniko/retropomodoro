@@ -1,3 +1,4 @@
+// app.js
 const { app, BrowserWindow, Notification, ipcMain } = require('electron');
 const path = require('path');
 let mainWindow;
@@ -14,6 +15,7 @@ function createWindow() {
     transparent: false,
     backgroundColor: '#000000',
     icon: iconPath, // This works for Linux
+    alwaysOnTop: true, // This makes the window stay on top of other windows
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
